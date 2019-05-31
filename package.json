@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "test": "node ./node_modules/vanad/bin/cli"
+    },
+  "dependencies": {
+    "bluebird": "^3.5.5",
+    "vanad": "^0.0.1-alpha"
+  }
+}
