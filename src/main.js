@@ -1,3 +1,3 @@
 module.exports = text => {
-    return 0;
+    return +text || 0;
 };
