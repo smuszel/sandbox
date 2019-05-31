@@ -11,5 +11,14 @@ module.exports = function*() {
     yield 'single value 1 evaluates to 1';
     assert(f(1) === 1);
     //
+    yield 'single value 0 evaluates to 0';
+    assert(f(0) === 0);
+    //
+    yield 'empty evaluates to 0';
+    assert(f('') === 0);
+    //
+    yield 'adding 2 and 5 evaluates to 7';
+    assert(f('2 7') === 7);
+    //
     yield 'end';
 };
