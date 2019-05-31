@@ -7,5 +7,9 @@ const assert = x => {
 module.exports = function*() {
     yield 'Adding nothing evaluates to zero';
     assert(f() === 0);
+    //
+    yield 'single value 1 evaluates to 1';
+    assert(f(1) === 1);
+    //
     yield 'end';
 };
