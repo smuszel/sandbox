@@ -20,5 +20,11 @@ module.exports = function*() {
     yield 'adding 2 and 5 evaluates to 7';
     assert(f('2 5') === 7);
     //
+    yield 'adding 2 and 5 and 6 evaluates to 13';
+    assert(f('2 5 6') === 13);
+    //
+    yield 'adding can accept , as separator';
+    assert(f('2,5,6') === 13);
+    //
     yield 'end';
 };
