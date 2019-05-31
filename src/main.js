@@ -1,3 +1,3 @@
-module.exports = txt => {
-    // return
+module.exports = text => {
+    return 0;
 };
