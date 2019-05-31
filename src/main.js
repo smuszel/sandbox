@@ -1,3 +1,3 @@
 module.exports = text => {
-    return +text || 0;
+    return (text || '').split(' ').reduce((acc, x) => acc + +x, 0);
 };
