@@ -4,5 +4,6 @@ module.exports = ({ process, console }) => {
         .replace(/\n/g, ',')
         .split(',')
         .reduce((acc, x) => acc + +x, 0);
-    return sum;
+
+    console.log(sum);
 };

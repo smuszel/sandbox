@@ -2,34 +2,68 @@
 const t = require('vanad');
 const f = require('./main');
 
-const consoleMock = { log: x => x };
-
-const emptyUndef = { argv: ['', '', undefined], console: consoleMock };
-const emptyStr = { argv: ['', '', ''] };
-
-const single1 = { argv: ['', '', '1'] };
-const single101 = { argv: ['', '', '101'] };
-
-const multiple1_3 = { argv: ['', '', '1,3'] };
-const multiple10_20_100 = { argv: ['', '', '10,20,100'] };
-
-const delimNewLine = { argv: ['', '', '10\n20\n100'] };
+const consoleMock = () => {
+    const values = [];
+    return {
+        log: x => values.push(x),
+        get values() {
+            return values;
+        },
+    };
+};
 
 t('Starts with zero', c => {
-    c(f({ process: emptyStr }), 0);
-    c(f({ process: emptyUndef }), 0);
+    const process = { argv: ['', '', ''] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, [0]);
+});
+
+t('Starts with zero', c => {
+    const process = { argv: ['', '', undefined] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, [0]);
 });
 
 t('Parses single values', c => {
-    c(f({ process: single1 }), 1);
-    c(f({ process: single101 }), 101);
+    const process = { argv: ['', '', '1'] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, [1]);
+});
+
+t('Parses single values', c => {
+    const process = { argv: ['', '', '821'] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, [821]);
 });
 
 t('Adds multiple values', c => {
-    c(f({ process: multiple1_3 }), 4);
-    c(f({ process: multiple10_20_100 }), 130);
+    const process = { argv: ['', '', '1,3'] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, [4]);
+});
+
+t('Adds multiple values', c => {
+    const process = { argv: ['', '', '10,100,20'] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, [130]);
 });
 
 t('Can use other delimiters', c => {
-    c(f({ process: delimNewLine }), 130);
+    const process = { argv: ['', '', '10\n100\n20'] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, [130]);
 });
