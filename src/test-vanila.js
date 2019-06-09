@@ -67,3 +67,19 @@ t('Can use other delimiters', c => {
 
     c(console.values, [130]);
 });
+
+t('Bails out on incorrect input', c => {
+    const process = { argv: ['', '', 'xyz'] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, ["value: 'xyz' is incorrect input"]);
+});
+
+t('Bails out on incorrect input', c => {
+    const process = { argv: ['', '', '1,2,a'] };
+    const console = consoleMock();
+    f({ process, console });
+
+    c(console.values, ["value: '1,2,a' is incorrect input"]);
+});
