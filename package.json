@@ -1,9 +1,0 @@
-{
-    "scripts": {
-        "test": "node ./node_modules/vanad/bin/cli"
-    },
-    "dependencies": {
-        "@types/node": "^12.0.7",
-        "vanad": "^0.0.3-alpha"
-    }
-}
