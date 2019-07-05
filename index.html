@@ -18,12 +18,19 @@
         position: relative;
     }
 
-    .next {
+    .counter>.next {
         position: absolute;
         top: 0;
         left: 0;
-        animation: 1s flip infinite;
         z-index: 10;
+    }
+
+    .counter>.next.up {
+        transform: translateY(-150%);
+    }
+
+    .counter>.next.down {
+        transform: translateY(0);
     }
 
     .counter>div {
@@ -34,12 +41,12 @@
         background: rgb(59, 59, 59);
         border: 3px solid black;
         border-radius: 5%;
+        transition: transform 1s;
     }
 
-    @keyframes flip {
+    /* @keyframes flip {
         from { transform: translateY(-150%) }
-        to { transform: translateY(0) }
-    }
+    } */
 </style>
 <body>
     <div class="counter left">

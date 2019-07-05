@@ -30,8 +30,7 @@ const inc = () => {
 const render = () => {
     Object.keys(elements).forEach(k => {
         elements[k].textContent = counter[k];
-        // elements[k].classList.toggle('next');
-        // elements[k].classList.toggle('current');
+        elements[k].classList.toggle('down');
     });
 };
 
