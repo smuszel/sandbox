@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+    }
+
+    input:invalid::placeholder {
+        color: red
+    }
+
+    input:invalid {
+        color: red
+    }
+</style>
+<body>
+    <form>
+        <label>
+            <span>
+                First Name
+            </span>
+            <input placeholder="fn" required name="firstName" type="text" />
+            <span class="error"></span>
+        </label>
+        <label>
+            <span>Last Name</span>
+            <input placeholder="ln" required name="lastName" type="text" />
+            <span class="error"></span>
+        </label>
+        <label>
+            <span>Email</span>
+            <input placeholder="em" required name="email" type="email" />
+            <span class="error"></span>
+        </label>
+        <label>
+            <span>Password</span>
+            <input placeholder="ps" required name="password" type="password" />
+            <span class="error"></span>
+        </label>
+        <label>
+            <span>Password Confirmation</span>
+            <input placeholder="psc" required name="passwordConfirmation" type="password" />
+            <span class="error"></span>
+        </label>
+        <button type="submit">submit</button>
+    </form>
+</body>
+<script src="./index.js"></script>
+</html>
