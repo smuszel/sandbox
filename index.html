@@ -7,51 +7,24 @@
     <title>Document</title>
 </head>
 <style>
-    form {
-        display: flex;
-        flex-direction: column;
+    body {
+        display: grid;
+        grid: repeat(3, 1fr) / repeat(3, 1fr);
+        grid-gap: 10px;
         width: 500px;
+        height: 500px;
     }
 
-    input:invalid::placeholder {
-        color: red
-    }
-
-    input:invalid {
-        color: red
+    div {
+        background: beige;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
     }
 </style>
 <body>
-    <form>
-        <label>
-            <span>
-                First Name
-            </span>
-            <input placeholder="fn" required name="firstName" type="text" />
-            <span class="error"></span>
-        </label>
-        <label>
-            <span>Last Name</span>
-            <input placeholder="ln" required name="lastName" type="text" />
-            <span class="error"></span>
-        </label>
-        <label>
-            <span>Email</span>
-            <input placeholder="em" required name="email" type="email" />
-            <span class="error"></span>
-        </label>
-        <label>
-            <span>Password</span>
-            <input placeholder="ps" required name="password" type="password" />
-            <span class="error"></span>
-        </label>
-        <label>
-            <span>Password Confirmation</span>
-            <input placeholder="psc" required name="passwordConfirmation" type="password" />
-            <span class="error"></span>
-        </label>
-        <button type="submit">submit</button>
-    </form>
 </body>
-<script src="./index.js"></script>
+<script src="https://unpkg.com/ramda@0.26.1/dist/ramda.min.js"></script>
+<script type="module" src="./index.js"></script>
 </html>

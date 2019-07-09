@@ -1,53 +1,58 @@
-const form = document.querySelector('form');
-let ps;
-let psc;
+const size = 3;
 
-Array.from(document.querySelectorAll('input')).forEach(inp => {
-    const err = inp.parentElement.querySelector('span.error');
-    inp.addEventListener('input', ev => {
-        if (inp.checkValidity()) {
-            err.textContent = '';
-        } else {
-            err.textContent = 'err';
-        }
+const range = n =>
+    Array(n)
+        .fill()
+        .map((_, ix) => ix);
+
+const outerJoin = (cb, xs, ys) => {
+    return ys.map(y => {
+        return { ...y, ...xs.find(x => cb(x, y)) };
     });
+};
 
-    inp.name === 'password' && (ps = inp);
-    inp.name === 'passwordConfirmation' && (psc = inp);
-});
+const board = Object.fromEntries(
+    range(size * size).map(n => {
+        const tile = document.createElement('div');
+        document.body.appendChild(tile);
 
-psc.addEventListener('input', ev => {
-    if (psc.value !== ps.value) {
-        psc.setCustomValidity('non matching');
-        ps.setCustomValidity('non matching');
-    } else {
-        psc.setCustomValidity('');
-        ps.setCustomValidity('');
-    }
+        return [n, tile];
+    }),
+);
 
-    if (psc.checkValidity()) {
-        err.textContent = '';
-    } else {
-        err.textContent = 'err';
-    }
-});
+const entities = [
+    {
+        id: 1,
+        type: 'player',
+    },
+    {
+        id: 2,
+        type: 'gold',
+    },
+];
 
-ps.addEventListener('input', ev => {
-    if (psc.value !== ps.value) {
-        psc.setCustomValidity('non matching');
-        ps.setCustomValidity('non matching');
-    } else {
-        psc.setCustomValidity('');
-        ps.setCustomValidity('');
-    }
+const positions = [
+    {
+        id: 1,
+        n: 4,
+    },
+    {
+        id: 2,
+        n: 0,
+    },
+];
 
-    if (ps.checkValidity()) {
-        err.textContent = '';
-    } else {
-        err.textContent = 'err';
-    }
-});
+const renderers = {
+    gold: () => '$',
+    player: () => '@',
+};
 
-form.addEventListener('submit', ev => {
-    alert('Success!');
-});
+const render = () => {
+    const buildItems = outerJoin((e, p) => e.id === p.id, entities, positions);
+
+    buildItems.forEach(item => {
+        board[item.n].textContent = renderers[item.type]();
+    });
+};
+
+render();
