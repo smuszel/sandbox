@@ -1,0 +1,16 @@
+body {
+    display: grid;
+    grid: repeat(3, 1fr) / repeat(3, 1fr);
+    grid-gap: 10px;
+    width: 500px;
+    height: 500px;
+    background: black;
+}
+
+div {
+    border: 1px solid beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}

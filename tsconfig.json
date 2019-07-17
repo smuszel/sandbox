@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "checkJs": false,
+        "outDir": "./dist",
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["esnext", "dom"]
+    }
+}
