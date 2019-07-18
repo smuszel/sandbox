@@ -13,6 +13,8 @@
         "style-loader": "^0.23.1",
         "webpack": "^4.35.3",
         "webpack-cli": "^3.3.6",
+        "ramda": "0.26.1",
+        "@types/ramda": "^0.26.16",
         "webpack-dev-server": "^3.7.2"
     }
 }
