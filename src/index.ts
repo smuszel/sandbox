@@ -4,24 +4,26 @@ import { initState } from './state';
 import { dom } from './dom';
 import { gameObjects } from '../metadata/gameObjects';
 import { addGameObject } from './commands/addGameObject';
-
-document.addEventListener('click', ev => {
-    // const n = Object.keys(board).find(n => board[n] === ev.target);
-    // const targetTile = n && board[n];
-    // const playerId = (state.entities.find(ent => ent.name === 'player') || { id: 0 }).id;
-    // const playerPosition = state.positions.find(p => p.id === playerId);
-    // if (n && targetTile && playerPosition && playerPosition.n !== +n) {
-    //     playerPosition.n = +n;
-    //     state.turns++;
-    //     render();
-    // }
-});
+import { placeGameObject } from './mutators/placeGameObject';
+import { flushTiles } from './macros/flushTiles';
 
 const config = JSON.parse(localStorage.config || '{ "x": 55, "y": 25 }');
-const state = addGameObject(initState(config))(gameObjects.player, 4);
+let state = flushTiles(addGameObject(initState(config))(gameObjects.player, 200));
 const _dom = dom(config);
 
+document.addEventListener('click', ev => {
+    const board = _dom.board;
+    const n = Object.keys(board).find(n => _dom.board[+n] === ev.target);
+    const targetTile = n && board[+n];
+    const playerId = (state.inner.gos.find(go => go.name === 'player') || { id: 0 }).id;
+
+    if (playerId && n) {
+        state = placeGameObject(state)(playerId, +n);
+        render(state, _dom);
+    }
+});
+
 // @ts-ignore
-window['state'] = state;
+window['state'] = () => state;
 
 render(state, _dom);
