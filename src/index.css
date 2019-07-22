@@ -1,18 +1,22 @@
 body {
+    --x: 0;
+    --y: 0;
+    --edge: 20px;
+    --debug: 1;
     display: grid;
-    grid: repeat(3, 1fr) / repeat(3, 1fr);
-    grid-gap: 10px;
+    grid: repeat(var(--y), var(--edge)) / repeat(var(--x), var(--edge));
     width: 500px;
     height: 500px;
     background: black;
 }
 
 div {
-    border: 1px solid beige;
+    border: calc(var(--debug) * 1px) solid rgb(117, 117, 117);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 15px;
+    font-family: 'Overpass Mono', monospace;
 }
 
 span {

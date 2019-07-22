@@ -4,10 +4,11 @@ const path = require('path');
 
 const paths = {
     index: path.resolve(__dirname, 'src', 'index.ts'),
-}
+    templ: path.resolve(__dirname, 'src', 'index.html'),
+};
 
 /** @type {webpack.Configuration} */
-module.exports =  {
+module.exports = {
     entry: {
         index: paths.index,
     },
@@ -15,14 +16,13 @@ module.exports =  {
         extensions: ['.js', '.css', '.ts'],
     },
     module: {
-        rules: [
-            { test: /\.ts/, use: ['babel-loader'] },
-            { test: /\.css/, use: ['style-loader', 'css-loader'] },
-        ]
+        rules: [{ test: /\.ts/, use: ['babel-loader'] }, { test: /\.css/, use: ['style-loader', 'css-loader'] }],
     },
     devtool: 'source-map',
     plugins: [
         new webpack.ProgressPlugin(),
-        new HtmlPlugin(),
+        new HtmlPlugin({
+            template: paths.templ,
+        }),
     ],
-}
+};

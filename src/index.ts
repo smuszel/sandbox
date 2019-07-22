@@ -2,9 +2,8 @@ import './index.css';
 import { render } from './render';
 import { initState } from './state';
 import { dom } from './dom';
-import { registerGameObject } from './mutators/registerGameObject';
 import { gameObjects } from '../metadata/gameObjects';
-import { placeGameObject } from './mutators/placeGameObject';
+import { addGameObject } from './commands/addGameObject';
 
 document.addEventListener('click', ev => {
     // const n = Object.keys(board).find(n => board[n] === ev.target);
@@ -18,15 +17,11 @@ document.addEventListener('click', ev => {
     // }
 });
 
-type F = (state: State) => (go: GameObjectData, n: number) => State;
+const config = JSON.parse(localStorage.config || '{ "x": 55, "y": 25 }');
+const state = addGameObject(initState(config))(gameObjects.player, 4);
+const _dom = dom(config);
 
-const addGameObject: F = state => (go, n) => {
-    const afterReg = registerGameObject(state)(go);
-    return placeGameObject(afterReg)(afterReg.idCounter - 1, n);
-};
+// @ts-ignore
+window['state'] = state;
 
-const state = addGameObject(initState(3))(gameObjects.player, 4);
-
-// const state = placeGameObject(registerGameObject(initState(3))(gameObjects.player))(1, 4);
-
-render(state, dom);
+render(state, _dom);

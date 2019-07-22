@@ -1,10 +1,10 @@
 import { range } from './util';
-// import { entitiesMap } from '../metadata/entities';
 
-export const initState: (edge: number) => State = edge => ({
+export const initState: (config: Config) => State = config => ({
     board: {
-        range: range(edge ** 2),
-        edge: edge,
+        range: range(config.x * config.y),
+        x: config.x,
+        y: config.y,
     },
     inner: {
         gos: [],
