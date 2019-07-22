@@ -7,7 +7,8 @@ import { addGameObject } from './commands/addGameObject';
 import { placeGameObject } from './mutators/placeGameObject';
 import { flushTiles } from './macros/flushTiles';
 
-const config = JSON.parse(localStorage.config || '{ "x": 55, "y": 25 }');
+const defaultConfig: Config = { x: 55, y: 25, randomBufferSize: 1000, seedString: 'abbac' };
+const config = JSON.parse(localStorage.config || JSON.stringify(defaultConfig));
 let state = flushTiles(addGameObject(initState(config))(gameObjects.player, 200));
 const _dom = dom(config);
 
@@ -22,7 +23,6 @@ document.addEventListener('click', ev => {
         render(state, _dom);
     }
 });
-
 // @ts-ignore
 window['state'] = () => state;
 

@@ -37,4 +37,6 @@ declare type State = {
 declare type Config = {
     x: number;
     y: number;
+    randomBufferSize: number;
+    seedString: string;
 };
