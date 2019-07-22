@@ -3,9 +3,18 @@ export const range = (n: number) =>
         .fill(undefined)
         .map((_, ix) => ix);
 
-export const outerJoin = <T, H>(cb: (a: T, b: H) => boolean, xs: T[], ys: H[]) => {
+const outerJoinBy = <A, B>(cb: (a: A, b: B) => boolean, xs: A[], ys: B[]) => {
     return ys.map(y => {
         return { ...y, ...xs.find(x => cb(x, y)) };
+    });
+};
+
+export const outerJoin = <A, B>(xs: A[], ys: B[], keyA: keyof A, keyB: keyof B, propName: string) => {
+    return xs.map(x => {
+        // @ts-ignore
+        const match = ys.find(y => x[keyA] === y[keyB]);
+        const res = { ...x, [propName]: match || null };
+        return res;
     });
 };
 

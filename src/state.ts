@@ -1,27 +1,15 @@
-import { entitiesMap } from '../data/entities';
-import config from '../data/config.json';
 import { range } from './util';
+// import { entitiesMap } from '../metadata/entities';
 
-export default <FlatState>{
-    boardRange: range(config.edge ** 2),
-    entities: [
-        { ...entitiesMap.player, id: 1 },
-        { ...entitiesMap.gold, id: 2 },
-        { ...entitiesMap.tile, id: 3 },
-        { ...entitiesMap.tile, id: 3 },
-        { ...entitiesMap.tile, id: 3 },
-    ],
+export const initState: (edge: number) => State = edge => ({
+    board: {
+        range: range(edge ** 2),
+        edge: edge,
+    },
+    inner: {
+        gos: [],
+        placements: [],
+    },
     turns: 0,
-    placements: [
-        {
-            id: 1,
-            entityId: 1,
-            n: 4,
-        },
-        {
-            id: 2,
-            entityId: 2,
-            n: 0,
-        },
-    ],
-};
+    idCounter: 1,
+});

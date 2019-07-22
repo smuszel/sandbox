@@ -1,15 +1,10 @@
-// import { outerJoin, range, maxByProp } from './util';
 import './index.css';
-// import groupBy from 'ramda/es/groupBy';
 import { render } from './render';
-import state from './state';
+import { initState } from './state';
 import { dom } from './dom';
-
-// const render = () => {
-//     state.entities = [...state.entities, ...rn.map((_, ix) => ({ id: 3 + ix, ...entities[2] }))];
-//     state.positions = [...state.positions, ...rn.map((_, ix) => ({ id: 3 + ix, n: ix }))];
-
-// };
+import { registerGameObject } from './mutators/registerGameObject';
+import { gameObjects } from '../metadata/gameObjects';
+import { placeGameObject } from './mutators/placeGameObject';
 
 document.addEventListener('click', ev => {
     // const n = Object.keys(board).find(n => board[n] === ev.target);
@@ -22,5 +17,16 @@ document.addEventListener('click', ev => {
     //     render();
     // }
 });
+
+type F = (state: State) => (go: GameObjectData, n: number) => State;
+
+const addGameObject: F = state => (go, n) => {
+    const afterReg = registerGameObject(state)(go);
+    return placeGameObject(afterReg)(afterReg.idCounter - 1, n);
+};
+
+const state = addGameObject(initState(3))(gameObjects.player, 4);
+
+// const state = placeGameObject(registerGameObject(initState(3))(gameObjects.player))(1, 4);
 
 render(state, dom);

@@ -1,8 +1,8 @@
-import config from '../data/config.json';
+import { config } from '../metadata/config';
 import { range } from './util';
 
 const board = (() =>
-    range(config.edge).map(() => {
+    range(config.edge ** 2).map(() => {
         const tile = document.createElement('div');
         document.body.appendChild(tile);
 

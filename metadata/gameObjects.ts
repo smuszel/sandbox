@@ -1,4 +1,4 @@
-export const entitiesMap = <const>{
+export const gameObjects = {
     player: {
         name: 'player',
         symbol: '@',
@@ -18,5 +18,3 @@ export const entitiesMap = <const>{
         precedence: 0,
     },
 };
-
-export const entities = Object.values(entitiesMap);

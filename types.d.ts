@@ -1,16 +1,34 @@
 declare type DOM = typeof import('./src/dom').dom;
+declare type cy = typeof import('cypress');
 
-declare type ElementOf<T> = T extends (infer X)[] ? X : never;
-declare type EntityData = ElementOf<typeof import('./data/entities').entities>;
-declare interface EntityId extends Number {}
-declare interface PlacementId extends Number {}
-declare type Entity = EntityData & { id: EntityId };
-declare type EntityType = keyof typeof import('./data/entities').entitiesMap;
-declare type Placement = { id: PlacementId; n: number; entityId: EntityId };
+declare type GameObjectData = {
+    name: string;
+    symbol: string;
+    color: string;
+    precedence: number;
+};
 
-declare type FlatState = {
-    boardRange: number[];
-    entities: Entity[];
+declare type GameObject = GameObjectData & {
+    id: number;
+};
+
+declare type Placement = {
+    id: number;
+    goId: number;
+    n: number;
+};
+
+declare type Entity = GameObject | Placement;
+
+declare type State = {
+    board: {
+        range: number[];
+        edge: number;
+    };
+    inner: {
+        gos: GameObject[];
+        placements: Placement[];
+    };
     turns: number;
-    placements: Placement[];
+    idCounter: number;
 };
