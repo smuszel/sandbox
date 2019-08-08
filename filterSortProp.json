@@ -1,0 +1,8 @@
+{
+    "inp": [
+        { "author": "B", "age": 10, "title": "abc" },
+        { "author": "A", "age": 22, "title": "xyz" },
+        { "author": "C", "age": 9, "title": "efg" }
+    ],
+    "out": ["A", "B"]
+}
