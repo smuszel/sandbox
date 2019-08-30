@@ -1,4 +1,5 @@
 import { range } from './util';
+import { Config } from './types';
 
 export const dom = (config: Config) => {
     document.body.style.setProperty('--x', config.x.toString());

@@ -1,5 +1,6 @@
 import { range } from './util';
 import { getRandGen } from './random';
+import { Config, State } from './types';
 
 export const initState: (config: Config) => State = config => {
     const rand = getRandGen(config.seedString);

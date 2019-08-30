@@ -1,3 +1,6 @@
+import { GameObject, Placement } from './types';
+import { gameObjects } from './metadata/gameObjects';
+
 export const range = (n: number) =>
     Array(n)
         .fill(undefined)
@@ -31,4 +34,15 @@ export const maxByProp = <T, K extends keyof T>(prop: K, xs: T[]): T | null => {
             return acc;
         }
     }, null);
+};
+
+export const build = (xs: GameObject[], ys: Placement[], obj: typeof gameObjects) => {
+    return xs.map(x => {
+        const key = `${x.type}Id` as 'gameObjectId';
+        const match = ys.find(y => x.id === y[key]);
+        //@ts-ignore
+        const res = { ...x, [match.type]: match };
+        const buildRes = { ...res, ...obj[x.name] };
+        return buildRes;
+    });
 };

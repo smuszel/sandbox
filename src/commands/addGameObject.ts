@@ -1,9 +1,10 @@
-import { registerGameObject } from '../mutators/registerGameObject';
-import { placeGameObject } from '../mutators/placeGameObject';
+import { GameObjectName, gameObjects } from '../metadata/gameObjects';
+import { State } from '../types';
 
-type F = (state: State) => (go: GameObjectData, n: number) => State;
+type F = (state: State) => (name: GameObjectName, n: number) => State;
 
-export const addGameObject: F = state => (go, n) => {
-    const afterReg = registerGameObject(state)(go);
-    return placeGameObject(afterReg)(afterReg.idCounter - 1, n);
+export const addGameObject: F = state => (name, n) => {
+    const go = gameObjects[name];
+    const afterReg = go.register(state);
+    return go.place(afterReg.idCounter - 1, n)(afterReg);
 };

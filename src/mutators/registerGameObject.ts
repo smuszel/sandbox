@@ -1,7 +1,10 @@
-type F = (state: State) => (gameObject: GameObjectData) => State;
+import { GameObjectName } from '../metadata/gameObjects';
+import { State, GameObject } from '../types';
 
-export const registerGameObject: F = state => gameObject => {
-    const go: GameObject = { ...gameObject, id: state.idCounter };
+type F = (name: GameObjectName) => (state: State) => State;
+
+export const registerGameObject: F = name => state => {
+    const go: GameObject = { name, id: state.idCounter, type: 'gameObject' };
 
     return {
         ...state,

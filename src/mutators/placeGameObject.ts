@@ -1,8 +1,10 @@
-type F = (state: State) => (goId: number, n: number) => State;
+import { State, Placement } from '../types';
 
-export const placeGameObject: F = state => (goId, n) => {
-    const placement: Placement = { id: state.idCounter, goId: goId, n };
-    const differentPlacement = (p: Placement) => p.goId !== goId;
+type F = (gameObjectId: number, n: number) => (state: State) => State;
+
+export const placeGameObject: F = (gameObjectId, n) => state => {
+    const placement: Placement = { type: 'placement', id: state.idCounter, gameObjectId, n };
+    const differentPlacement = (p: Placement) => p.gameObjectId !== gameObjectId;
     const otherPlacements = state.inner.placements.filter(differentPlacement);
 
     return {
